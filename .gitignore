@@ -1,0 +1,24 @@
+# deps
+node_modules/
+.pnpm-store/
+
+# builds
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
+
+# python
+__pycache__/
+*.pyc
+.venv/
+apps/analyzer/.venv/
+
+# env
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store

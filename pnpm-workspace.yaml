@@ -1,0 +1,6 @@
+packages:
+  - "apps/web"
+  - "apps/blog"
+  - "apps/api"
+  - "packages/*"
+# apps/analyzer (Python) 는 pnpm 워크스페이스에서 제외 — 자체 pyproject.toml 로 관리

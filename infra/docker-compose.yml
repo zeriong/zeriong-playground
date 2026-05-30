@@ -1,0 +1,53 @@
+# 온프레미스 전체 오케스트레이션.
+# 빌드 컨텍스트는 리포 루트(..) — Dockerfile 들이 pnpm 워크스페이스 전체를 참조하기 때문.
+# 운영 배포 시에는 build 대신 image: <registry>/<app>:<tag> 로 교체(아래 주석 참고).
+
+services:
+  gateway:
+    image: nginx:1.27-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - web
+      - blog
+      - api
+      - analyzer
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+    # image: ${REGISTRY}/web:${TAG:-latest}
+    expose:
+      - "80"
+    restart: unless-stopped
+
+  blog:
+    build:
+      context: ..
+      dockerfile: apps/blog/Dockerfile
+    # image: ${REGISTRY}/blog:${TAG:-latest}
+    expose:
+      - "3001"
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+    # image: ${REGISTRY}/api:${TAG:-latest}
+    expose:
+      - "4000"
+    restart: unless-stopped
+
+  analyzer:
+    build:
+      context: ..
+      dockerfile: apps/analyzer/Dockerfile
+    # image: ${REGISTRY}/analyzer:${TAG:-latest}
+    expose:
+      - "8000"
+    restart: unless-stopped
