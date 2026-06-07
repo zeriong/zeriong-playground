@@ -1,0 +1,86 @@
+/* 과일잡기 게임 캔버스 전용 애니메이션/요소 스타일.
+   인라인 스타일로 표현 불가한 keyframes/의사요소만 여기서 다룬다. */
+
+.fg-fruit {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45));
+  will-change: top, left;
+}
+
+/* 특수 과일(빠른) 꼬리 — 빠르게 떨어지는 느낌의 잔상 */
+.fg-fruit__trail {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  width: 0.18em;
+  height: 1.1em;
+  transform: translateX(-50%);
+  background: linear-gradient(to top, rgba(255, 210, 63, 0.85), rgba(255, 210, 63, 0));
+  border-radius: 999px;
+  filter: blur(2px);
+}
+
+/* 잡힘 → 터짐 */
+.fg-fruit--pop {
+  animation: fg-pop 260ms ease-out forwards;
+}
+@keyframes fg-pop {
+  0% { transform: translate(-50%, -50%) scale(0.9); opacity: 1; }
+  40% { transform: translate(-50%, -50%) scale(1.6); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2.1); opacity: 0; }
+}
+
+/* 점수 버스트 라벨 */
+.fg-burst {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-weight: 800;
+  font-size: 6vmin;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  user-select: none;
+  animation: fg-burst 500ms ease-out forwards;
+}
+@keyframes fg-burst {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0; }
+  25% { transform: translate(-50%, -90%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -180%) scale(1); opacity: 0; }
+}
+
+/* 손가락 끝 도형 (작은 반투명 원) */
+.fg-tip {
+  position: absolute;
+  width: 4.2vmin;
+  height: 4.2vmin;
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.6);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  transition: opacity 0.15s, background 0.1s;
+  will-change: left, top;
+}
+
+/* 손 커서 링 */
+.fg-cursor {
+  position: absolute;
+  width: 12vmin;
+  height: 12vmin;
+  max-width: 110px;
+  max-height: 110px;
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 0 24px rgba(255, 210, 63, 0.35), inset 0 0 16px rgba(255, 255, 255, 0.2);
+  transition: opacity 0.15s, border-color 0.12s, background 0.12s;
+  will-change: left, top, transform;
+}

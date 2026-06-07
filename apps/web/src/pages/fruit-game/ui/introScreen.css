@@ -1,0 +1,36 @@
+/* 인트로 장식 애니메이션 */
+
+.fg-bounce {
+  animation: fg-bounce 2.2s ease-in-out infinite;
+}
+@keyframes fg-bounce {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-14px) rotate(6deg); }
+}
+
+.fg-intro-deco {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+.fg-float {
+  position: absolute;
+  font-size: clamp(28px, 5vw, 52px);
+  opacity: 0.18;
+  filter: blur(0.5px);
+  animation: fg-drift 9s ease-in-out infinite;
+}
+.fg-float--0 { left: 8%;  top: 18%; animation-delay: 0s;   }
+.fg-float--1 { left: 82%; top: 22%; animation-delay: 1.2s; }
+.fg-float--2 { left: 16%; top: 70%; animation-delay: 2.1s; }
+.fg-float--3 { left: 74%; top: 64%; animation-delay: 0.6s; }
+.fg-float--4 { left: 46%; top: 12%; animation-delay: 3s;   }
+.fg-float--5 { left: 88%; top: 48%; animation-delay: 1.8s; }
+.fg-float--6 { left: 6%;  top: 44%; animation-delay: 2.6s; }
+
+@keyframes fg-drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-26px) rotate(14deg); }
+}
